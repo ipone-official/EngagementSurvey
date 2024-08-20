@@ -3,7 +3,7 @@
     <img src="https://webapps.ip-one.com/IP1Career/static/logo-ipone-white.png" width="60vh" height="60vh" />
 
     <v-spacer></v-spacer>
-    <v-toolbar-title v-if="showUser" class="name-fl">{{ us }}</v-toolbar-title>
+    <div v-if="showUser" class="name-fl">{{ us }}</div>
 
     <v-menu v-if="showUser">
       <template v-slot:activator="{ props }">
@@ -76,5 +76,11 @@ function logout() {
   justify-content: flex-end;
   margin-right: 10px;
   font-weight: bold;
+}
+
+@media (max-width: 685px){
+  .name-fl{
+    font-size: 1rem;
+  }
 }
 </style>
