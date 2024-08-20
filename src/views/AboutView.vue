@@ -8,7 +8,7 @@
       </v-col>
       <v-col class="d-flex justify-center justify-sm-end" cols="12" sm="3">
         <v-sheet color="#007bc4" height="40" class="pa-2" rounded>
-          <v-icon class="mr-1">mdi-clock-time-five</v-icon>{{ timeLeft.minutes }} : {{ timeLeft.seconds }}
+          <v-icon class="mr-1">mdi-alarm-multiple</v-icon>{{ timeLeft.minutes }} : {{ timeLeft.seconds }}
         </v-sheet>
       </v-col>
     </v-row>
