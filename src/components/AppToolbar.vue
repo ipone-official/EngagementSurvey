@@ -1,14 +1,14 @@
 <template>
   <v-toolbar color="#007fc4" class="px-5 py-3" dark v-if="showDrawer">
-    <img src="https://webapps.ip-one.com/IP1Career/static/logo-ipone-white.png" width="60vh" height="60vh" />
+    <img src="https://webapps.ip-one.com/IP1Career/static/logo-ipone-white.png" width="50vh" height="50vh" />
 
     <v-spacer></v-spacer>
     <div v-if="showUser" class="name-fl">{{ us }}</div>
 
     <v-menu v-if="showUser">
       <template v-slot:activator="{ props }">
-        <v-avatar color="white" v-bind="props">
-          <v-icon icon="mdi-account-circle" color="#007bc4" size="x-large"></v-icon>
+        <v-avatar color="white" v-bind="props" size="32">
+          <v-icon icon="mdi-account-circle" color="#007bc4" size="30"></v-icon>
         </v-avatar>
       </template>
       <v-list>
@@ -80,7 +80,7 @@ function logout() {
 
 @media (max-width: 685px){
   .name-fl{
-    font-size: 1rem;
+    font-size: 13px;
   }
 }
 </style>

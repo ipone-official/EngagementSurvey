@@ -1,29 +1,29 @@
 <template>
+      <v-btn color="#007bc4" class="pa-2 mt-3 d-flex align-center justify-center position-sticky top-0 mx-auto" readonly style="z-index: 10;">
+          <v-icon class="mr-1 ">mdi-alarm-multiple</v-icon>{{ timeLeft.minutes }} : {{ timeLeft.seconds }}
+        </v-btn>
   <v-container class="about my-6">
-    <v-row>
-      <v-col cols="3" sm="0" class="d-none d-sm-block">
-      </v-col>
-      <v-col cols="12" sm="6" class="col-space">
+
         <p class="text-center ff">Engagement Survey</p>
-      </v-col>
-      <v-col class="d-flex justify-center justify-sm-end" cols="12" sm="3">
-        <v-sheet color="#007bc4" height="40" class="pa-2" rounded>
-          <v-icon class="mr-1">mdi-alarm-multiple</v-icon>{{ timeLeft.minutes }} : {{ timeLeft.seconds }}
-        </v-sheet>
-      </v-col>
-    </v-row>
+
+
 
     <p class="mt-5">
       แบบสำรวจความคิดเห็นของพนักงานที่จัดทำขึ้นในครั้งนี้มีวัตถุประสงค์เพื่อสอบถามความคิดเห็นของท่านเกี่ยวกับการทำงานใน
-      กลุ่มบริษัท ไอ.พี. วัน จำกัด ในช่วงปีที่ผ่านมา โดยคำตอบของท่านจะไม่มีการนำไปเปิดเผยเป็นรายบุคคล
-      เป็นเพียงแต่นำคำตอบท่านไปประมวลผลร่วมกับพนักงานท่านอื่นๆ ในบริษัท นอกจากนี้
-      การตอบแบบสำรวจในครั้งนี้ไม่มีคำตอบใดผิดหรือถูก ท่านสามารถเลือกตอบคำตอบที่ตรงกับความคิดเห็นของท่านมากที่สุด
-      เพื่อให้ผลที่ได้จากการสำรวจครั้งนี้นำไปสู่แนวทางในการพัฒนา ปรับปรุง การปฏิบัติงานภายใน “ไอ.พี. วัน” ได้ดียิ่งขึ้น
+      กลุ่มบริษัท ไอ.พี. วัน จำกัด ในช่วงปีที่ผ่านมา
+      โดยคำตอบของท่านจะไม่มีการนำไปเปิดเผยเป็นรายบุคคล
+      เป็นเพียงแต่นำคำตอบท่านไปประมวลผลร่วมกับพนักงานท่านอื่นๆ ในบริษัท
+      นอกจากนี้ การตอบแบบสำรวจในครั้งนี้ไม่มีคำตอบใดผิดหรือถูก
+      ท่านสามารถเลือกตอบคำตอบที่ตรงกับความคิดเห็นของท่านมากที่สุด
+      เพื่อให้ผลที่ได้จากการสำรวจครั้งนี้นำไปสู่แนวทางในการพัฒนา ปรับปรุง
+      การปฏิบัติงานภายใน “ไอ.พี. วัน” ได้ดียิ่งขึ้น
     </p>
 
     <v-divider :thickness="1" color="#007bc4" class="my-5 border-opacity-100"></v-divider>
 
-    <p class="font-weight-bold">คำแนะนำในการกรอกแบบสำรวจแบบสำรวจฉบับนี้ แบ่งออกเป็น 2 ส่วน ดังนี้</p>
+    <p class="font-weight-bold">
+      คำแนะนำในการกรอกแบบสำรวจแบบสำรวจฉบับนี้ แบ่งออกเป็น 2 ส่วน ดังนี้
+    </p>
     <p>ส่วนที่ 1 ข้อมูลส่วนบุคคล จำนวน 1 ข้อ</p>
     <p>
       ส่วนที่ 2 ความคิดเห็นเกี่ยวกับการทำงานภายในกลุ่ม ไอ.พี. วัน จำนวน 80 ข้อ
@@ -31,11 +31,14 @@
     <p>ส่วนที่ 3 ความเห็นเพิ่มเติม จำนวน 3 ข้อ</p>
 
     <p>กรุณาใช้เวลาในการกรอกแบบสำรวจ<b>ไม่เกิน 20 นาที</b></p>
-    <p>โปรดแสดงความคิดตามความคิดของท่านอย่างแท้จริง โดยไม่ปรึกษาร่วมกับเพื่อนร่วมงานท่านอื่น</p>
+    <p>
+      โปรดแสดงความคิดตามความคิดของท่านอย่างแท้จริง
+      โดยไม่ปรึกษาร่วมกับเพื่อนร่วมงานท่านอื่น
+    </p>
 
     <v-divider :thickness="1" color="#007bc4" class="my-5 border-opacity-100"></v-divider>
 
-    <p class="font-weight-bold">
+    <p class="font-weight-bold" id="Des">
       คำชี้แจง : โปรดทำเครื่องหมายวงกลม (•)
       ในช่องคำตอบที่ตรงกับความคิดเห็นของท่านมากที่สุด
     </p>
@@ -46,7 +49,6 @@
       </div>
     </div>
     <v-data-iterator :items="questions" :items-per-page="itemsPerPage">
-
       <template v-slot:default="{ items }">
         <div v-for="item in items" :key="item.question_No">
           <div class="pb-5">
@@ -64,69 +66,68 @@
       </template>
 
       <template v-slot:footer="{ page, pageCount, prevPage, nextPage }">
-
         <div class="d-flex align-center justify-center pa-4">
           <div class="d-flex align-center justify-center text-center">
-            <v-btn color="#007bc4" :disabled="page === 1" icon="mdi-arrow-left" size="small" @click="prevPage"></v-btn>
-            <div class="mx-2">
-              หน้า {{ page }} จาก {{ pageCount }}
-            </div>
+            <v-btn color="#007bc4" :disabled="page === 1" icon="mdi-arrow-left" size="small"
+              @click="handlePrevPage(prevPage)"></v-btn>
+            <div class="mx-2">หน้า {{ page }} จาก {{ pageCount }}</div>
             <v-btn color="#007bc4" :disabled="page === pageCount" icon="mdi-arrow-right" size="small"
-              @click="nextPage"></v-btn>
+              @click="handleNextPage(nextPage)"></v-btn>
           </div>
         </div>
       </template>
     </v-data-iterator>
 
-
     <v-divider :thickness="1" color="#007bc4" class="my-4 border-opacity-100"></v-divider>
 
-    <p class="font-weight-bold pb-5">
-      คำชี้แจง : โปรดเลือกหัวข้อที่ท่านเห็นว่า สำคัญที่สุด สำหรับตัวท่าน (ถ้ามี)
-      มาเพียง 2 ข้อ พร้อมเขียนความคิดเห็นและข้อเสนอแนะในที่ว่างด้านล่าง
-    </p>
+    <v-expansion-panels class="mb-5">
+      <v-expansion-panel>
+        <v-expansion-panel-title class="font-weight-bold" color="#007bc4">คำชี้แจง : โปรดเลือกหัวข้อที่ท่านเห็นว่า
+          สำคัญที่สุด สำหรับตัวท่าน (ถ้ามี)
+          มาเพียง 2 ข้อ พร้อมเขียนความคิดเห็นและข้อเสนอแนะในที่ว่างด้านล่าง</v-expansion-panel-title>
+        <v-expansion-panel-text>
+          <v-row v-for="(row, rowIndex) in groupedSubjectives" :key="rowIndex">
+            <v-col v-for="subjective in row" :key="subjective.questionID" cols="12"
+              class="d-flex align-center justify-start pa-0 ml-2">
+              <v-checkbox :label="subjective.question" :value="subjective.questionID" v-model="question81" hide-details
+                color="#007bc4" :false-value="''" :disabled="!allAnswersFilled"></v-checkbox>
+            </v-col>
+          </v-row>
+          <v-textarea v-model="commentQuestion81" :disabled="question81 == '' || !allAnswersFilled" variant="solo"
+            bg-color="#f8c849" color="black" rows="3" prepend-inner-icon="mdi-text-box-outline"
+            label="ความคิดเห็นหรือข้อเสนอแนะ" maxlength="255" class="mt-3"></v-textarea>
 
+          <v-row v-for="(row, rowIndex) in groupedSubjectives" :key="rowIndex">
+            <!-- เติมคอลัมน์ว่างในแถวสุดท้ายถ้าจำเป็น -->
+            <v-col v-for="subjective in row" :key="subjective.questionID" cols="12"
+              class="d-flex align-center justify-start pa-0 ml-2">
+              <v-checkbox :label="subjective.question" :value="subjective.questionID" v-model="question82" hide-details
+                color="#007bc4" :false-value="''" :disabled="!allAnswersFilled"></v-checkbox>
+            </v-col>
+          </v-row>
+          <v-textarea v-model="commentQuestion82" :disabled="question82 == '' || !allAnswersFilled" variant="solo"
+            bg-color="#f8c849" color="black" rows="3" label="ความคิดเห็นหรือข้อเสนอแนะ"
+            prepend-inner-icon="mdi-text-box-outline" maxlength="255" class="mt-3"></v-textarea>
 
-    <v-row v-for="(row, rowIndex) in groupedSubjectives" :key="rowIndex">
-      <v-col v-for="subjective in row" :key="subjective.questionID" cols="12"
-        class="d-flex align-center justify-start pa-0 ml-2">
-        <v-checkbox :label="subjective.question" :value="subjective.questionID" v-model="question81" hide-details
-          color="#007bc4" :false-value="''" :disabled="!allAnswersFilled"></v-checkbox>
-      </v-col>
-    </v-row>
-    <v-textarea v-model="commentQuestion81" :disabled="question81 == '' || !allAnswersFilled" variant="solo"
-      bg-color="#f8c849" color="black" rows="3" prepend-inner-icon="mdi-text-box-outline"
-      label="ความคิดเห็นหรือข้อเสนอแนะ" maxlength="255" class="mt-3"></v-textarea>
-
-
-    <v-row v-for="(row, rowIndex) in groupedSubjectives" :key="rowIndex">
-      <!-- เติมคอลัมน์ว่างในแถวสุดท้ายถ้าจำเป็น -->
-      <v-col v-for="subjective in row" :key="subjective.questionID" cols="12"
-        class="d-flex align-center justify-start pa-0 ml-2">
-        <v-checkbox :label="subjective.question" :value="subjective.questionID" v-model="question82" hide-details
-          color="#007bc4" :false-value="''" :disabled="!allAnswersFilled"></v-checkbox>
-      </v-col>
-    </v-row>
-    <v-textarea v-model="commentQuestion82" :disabled="question82 == '' || !allAnswersFilled" variant="solo"
-      bg-color="#f8c849" color="black" rows="3" label="ความคิดเห็นหรือข้อเสนอแนะ"
-      prepend-inner-icon="mdi-text-box-outline" maxlength="255" class="mt-3"></v-textarea>
-
-    <v-row v-for="(row, rowIndex) in groupedSubjectives" :key="rowIndex">
-      <!-- เติมคอลัมน์ว่างในแถวสุดท้ายถ้าจำเป็น -->
-      <v-col v-for="subjective in row" :key="subjective.questionID" cols="12"
-        class="d-flex align-center justify-start pa-0 ml-2">
-        <v-checkbox :label="subjective.question" :value="subjective.questionID" v-model="question83" hide-details
-          color="#007bc4" :false-value="''" :disabled="!allAnswersFilled"></v-checkbox>
-      </v-col>
-    </v-row>
-    <v-textarea v-model="commentQuestion83" :disabled="question83 == '' || !allAnswersFilled" variant="solo"
-      bg-color="#f8c849" color="black" rows="3" label="ความคิดเห็นหรือข้อเสนอแนะ"
-      prepend-inner-icon="mdi-text-box-outline" maxlength="255" class="mt-3"></v-textarea>
+          <v-row v-for="(row, rowIndex) in groupedSubjectives" :key="rowIndex">
+            <!-- เติมคอลัมน์ว่างในแถวสุดท้ายถ้าจำเป็น -->
+            <v-col v-for="subjective in row" :key="subjective.questionID" cols="12"
+              class="d-flex align-center justify-start pa-0 ml-2">
+              <v-checkbox :label="subjective.question" :value="subjective.questionID" v-model="question83" hide-details
+                color="#007bc4" :false-value="''" :disabled="!allAnswersFilled"></v-checkbox>
+            </v-col>
+          </v-row>
+          <v-textarea v-model="commentQuestion83" :disabled="question83 == '' || !allAnswersFilled" variant="solo"
+            bg-color="#f8c849" color="black" rows="3" label="ความคิดเห็นหรือข้อเสนอแนะ"
+            prepend-inner-icon="mdi-text-box-outline" maxlength="255" class="mt-3"></v-textarea>
+        </v-expansion-panel-text>
+      </v-expansion-panel>
+    </v-expansion-panels>
 
     <v-row>
       <v-col class="d-flex justify-end">
-        <v-btn @click="saveAnswers" color="#f8c849" append-icon="mdi-text-box-check">บันทึกคำตอบ</v-btn>
-        <v-btn @click="submitAnswers" color="#007bc4" append-icon="mdi-send-variant" class="ml-4">ส่งคำตอบ</v-btn>
+        <v-btn @click="saveAnswers" color="#f8c849" append-icon="mdi-text-box-check" :readonly="!allAnswersFilled">บันทึกคำตอบ</v-btn>
+        <v-btn @click="submitAnswers" color="#007bc4" append-icon="mdi-send-variant" class="ml-4" :readonly="!allAnswersFilled">ส่งคำตอบ</v-btn>
       </v-col>
     </v-row>
 
@@ -167,7 +168,8 @@
       <h2 class="mb-6">ครบแล้ว</h2>
 
       <p class="mb-4 text-medium-emphasis">
-        ตอนนี้คุณทำแบบสอบถามครบทุกข้อแล้ว คุณไม่สามารถแก้ไขคำตอบของแบบสอบถามได้แล้ว
+        ตอนนี้คุณทำแบบสอบถามครบทุกข้อแล้ว
+        คุณไม่สามารถแก้ไขคำตอบของแบบสอบถามได้แล้ว
       </p>
 
       <v-divider class="mb-4"></v-divider>
@@ -206,7 +208,7 @@ export default {
       isActive: true,
       timeLeft: {
         minutes: 0,
-        seconds: 0
+        seconds: 0,
       },
       timeoutDialog: false,
       fDialog: false,
@@ -222,21 +224,17 @@ export default {
 
   watch: {
     question81() {
-      if (this.getState)
-        return this.getState = false
-      this.commentQuestion81 = ''
+      if (this.getState) return (this.getState = false);
+      this.commentQuestion81 = "";
     },
     question82() {
-      if (this.getState)
-        return this.getState = false
-      this.commentQuestion82 = ''
-
+      if (this.getState) return (this.getState = false);
+      this.commentQuestion82 = "";
     },
     question83() {
-      if (this.getState)
-        return this.getState = false
-      this.commentQuestion83 = ''
-    }
+      if (this.getState) return (this.getState = false);
+      this.commentQuestion83 = "";
+    },
   },
 
   computed: {
@@ -249,7 +247,7 @@ export default {
       }
 
       return result;
-    }
+    },
   },
 
   created() {
@@ -265,7 +263,6 @@ export default {
       localStorage.removeItem("userData");
       localStorage.removeItem("jwtToken");
       localStorage.removeItem("userId");
-      this.us = "";
       this.$router.push("/");
       this.timeoutDialog = false;
     },
@@ -274,7 +271,6 @@ export default {
       localStorage.removeItem("userData");
       localStorage.removeItem("jwtToken");
       localStorage.removeItem("userId");
-      this.us = "";
       this.$router.push("/");
       this.timeoutDialog = false;
     },
@@ -376,13 +372,13 @@ export default {
           if (this.answers[key] === "") {
             Swal.fire({
               title: "ผิดพลาด!",
-              text: 'คุณยังตอบแบบสอบถามไม่ครบทุกข้อ',
+              text: "คุณยังตอบแบบสอบถามไม่ครบทุกข้อ",
               icon: "error",
               confirmButtonColor: "#f8c849",
               confirmButtonText: "ตกลง",
               allowOutsideClick: false,
             });
-            return
+            return;
           }
         }
 
@@ -393,17 +389,22 @@ export default {
         console.log(response);
         Swal.fire({
           title: "สำเร็จ!",
-          text: 'แบบสอบถามของคุณถูกส่งเรียบร้อยแล้ว',
+          text: "แบบสอบถามของคุณถูกส่งเรียบร้อยแล้ว",
           icon: "success",
           confirmButtonColor: "#37bf37",
           confirmButtonText: "ตกลง",
           allowOutsideClick: false,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.logout();
+          }
         });
+
       } catch (error) {
         console.error(error);
         Swal.fire({
           title: "ผิดพลาด!",
-          text: 'คุณยังตอบแบบสอบถามไม่ครบทุกข้อ',
+          text: "คุณยังตอบแบบสอบถามไม่ครบทุกข้อ",
           icon: "error",
           confirmButtonColor: "#f8c849",
           confirmButtonText: "ตกลง",
@@ -520,7 +521,7 @@ export default {
         console.log(response);
         Swal.fire({
           title: "สำเร็จ!",
-          text: 'บันทึกข้อมูลคำตอบของคุณเรียบร้อยแล้ว',
+          text: "บันทึกข้อมูลคำตอบของคุณเรียบร้อยแล้ว",
           icon: "success",
           confirmButtonColor: "#37bf37",
           confirmButtonText: "ตกลง",
@@ -584,35 +585,32 @@ export default {
 
         const auth = {
           userID: myName,
-          year: this.formYear
+          year: this.formYear,
         };
         const response = await apiMentorEdit.getAnswersByUserID(auth);
         for (var i = 1; i < 81; i++) {
           this.answers[i] = response.data[`answerQuestion${i}`];
         }
 
-        this.question81 = response.data.answerQuestion81
-        this.commentQuestion81 = response.data.answerQuestion81Comment
-        this.question82 = response.data.answerQuestion82
-        this.commentQuestion82 = response.data.answerQuestion82Comment
-        this.question83 = response.data.answerQuestion83
-        this.commentQuestion83 = response.data.answerQuestion83Comment
-        this.getState = true
-
-
+        this.question81 = response.data.answerQuestion81;
+        this.commentQuestion81 = response.data.answerQuestion81Comment;
+        this.question82 = response.data.answerQuestion82;
+        this.commentQuestion82 = response.data.answerQuestion82Comment;
+        this.question83 = response.data.answerQuestion83;
+        this.commentQuestion83 = response.data.answerQuestion83Comment;
+        this.getState = true;
 
         for (let r = 1; r < 81; r++) {
-          if (this.answers[r] === '') {
+          if (this.answers[r] === "") {
             this.allAnswersFilled = true;
-            console.log('ไม่ครบ');
-            break;  // หยุดการวนลูปเมื่อพบค่าเป็น ''
+            console.log("ไม่ครบ");
+            break; // หยุดการวนลูปเมื่อพบค่าเป็น ''
           }
         }
 
         if (!this.allAnswersFilled) {
-          this.fDialog = true;  // แสดง dialog ถ้าค่าใน answers ทั้งหมดไม่เป็น ''
+          this.fDialog = true; // แสดง dialog ถ้าค่าใน answers ทั้งหมดไม่เป็น ''
         }
-
       } catch (error) {
         this.allAnswersFilled = true;
         console.error(error);
@@ -634,11 +632,33 @@ export default {
     updateTime() {
       const minutes = Math.floor(this.countdown / 60);
       const seconds = this.countdown % 60;
-      this.timeLeft.minutes = minutes.toString().padStart(2, '0');
-      this.timeLeft.seconds = seconds.toString().padStart(2, '0');
+      this.timeLeft.minutes = minutes.toString().padStart(2, "0");
+      this.timeLeft.seconds = seconds.toString().padStart(2, "0");
     },
-  },
 
+    top() {
+      const element = document.getElementById('Des');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    },
+
+    handlePrevPage(prevPage) {
+      this.top(); // เรียกใช้ฟังก์ชันเลื่อนหน้า
+      prevPage(); // เรียกฟังก์ชันเพื่อเปลี่ยนหน้าไปหน้าก่อนหน้า
+    },
+    handleNextPage(nextPage) {
+      this.top(); // เรียกใช้ฟังก์ชันเลื่อนหน้า
+      nextPage(); // เรียกฟังก์ชันเพื่อเปลี่ยนหน้าไปหน้าถัดไป
+    },
+
+    logout() {
+      localStorage.removeItem("userData");
+      localStorage.removeItem("jwtToken");
+      localStorage.removeItem("userId");
+      this.$router.push("/");
+    }
+  },
 };
 </script>
 
@@ -657,7 +677,7 @@ export default {
   width: 40%;
 }
 
-@media (max-width : 960px) {
+@media (max-width: 960px) {
   .set-size {
     width: 100%;
   }
@@ -667,7 +687,13 @@ export default {
   }
 
   .col-space {
-    padding: 12px 12px 0px 12px
+    padding: 12px 12px 0px 12px;
+  }
+}
+
+@media (max-width: 685px) {
+  .ff {
+    font-size: 1.6rem;
   }
 }
 </style>
