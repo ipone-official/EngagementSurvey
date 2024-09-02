@@ -1,12 +1,11 @@
 <template>
-      <v-btn color="#007bc4" class="pa-2 mt-3 d-flex align-center justify-center position-sticky top-0 mx-auto" readonly style="z-index: 10;">
-          <v-icon class="mr-1 ">mdi-alarm-multiple</v-icon>{{ timeLeft.minutes }} : {{ timeLeft.seconds }}
-        </v-btn>
+
   <v-container class="about my-6">
-
-        <p class="text-center ff">Engagement Survey</p>
-
-
+    <v-btn color="#007bc4" class="pa-2 d-flex align-end justify-end position-sticky top-0 ml-auto" readonly
+      style="z-index: 10;" v-if="showTime">
+      <v-icon class="mr-1 ">mdi-alarm-multiple</v-icon>{{ timeLeft.minutes }} : {{ timeLeft.seconds }}
+    </v-btn>
+    <p class="text-center ff">Engagement Survey</p>
 
     <p class="mt-5">
       แบบสำรวจความคิดเห็นของพนักงานที่จัดทำขึ้นในครั้งนี้มีวัตถุประสงค์เพื่อสอบถามความคิดเห็นของท่านเกี่ยวกับการทำงานใน
@@ -24,13 +23,12 @@
     <p class="font-weight-bold">
       คำแนะนำในการกรอกแบบสำรวจแบบสำรวจฉบับนี้ แบ่งออกเป็น 2 ส่วน ดังนี้
     </p>
-    <p>ส่วนที่ 1 ข้อมูลส่วนบุคคล จำนวน 1 ข้อ</p>
     <p>
-      ส่วนที่ 2 ความคิดเห็นเกี่ยวกับการทำงานภายในกลุ่ม ไอ.พี. วัน จำนวน 80 ข้อ
+      ส่วนที่ 1 ความคิดเห็นเกี่ยวกับการทำงานภายในกลุ่ม ไอ.พี. วัน จำนวน 80 ข้อ
     </p>
-    <p>ส่วนที่ 3 ความเห็นเพิ่มเติม จำนวน 3 ข้อ</p>
+    <p>ส่วนที่ 2 ความเห็นเพิ่มเติม จำนวน 3 ข้อ</p>
 
-    <p>กรุณาใช้เวลาในการกรอกแบบสำรวจ<b>ไม่เกิน 20 นาที</b></p>
+    <p>กรุณาใช้เวลาในการกรอกแบบสำรวจ<b>ไม่เกิน 30 นาที</b></p>
     <p>
       โปรดแสดงความคิดตามความคิดของท่านอย่างแท้จริง
       โดยไม่ปรึกษาร่วมกับเพื่อนร่วมงานท่านอื่น
@@ -39,7 +37,7 @@
     <v-divider :thickness="1" color="#007bc4" class="my-5 border-opacity-100"></v-divider>
 
     <p class="font-weight-bold" id="Des">
-      คำชี้แจง : โปรดทำเครื่องหมายวงกลม (•)
+      <u>คำชี้แจง</u> ส่วนที่ 1 : โปรดทำเครื่องหมายวงกลม (•)
       ในช่องคำตอบที่ตรงกับความคิดเห็นของท่านมากที่สุด
     </p>
     <div class="pb-4">
@@ -80,54 +78,32 @@
 
     <v-divider :thickness="1" color="#007bc4" class="my-4 border-opacity-100"></v-divider>
 
-    <v-expansion-panels class="mb-5">
-      <v-expansion-panel>
-        <v-expansion-panel-title class="font-weight-bold" color="#007bc4">คำชี้แจง : โปรดเลือกหัวข้อที่ท่านเห็นว่า
-          สำคัญที่สุด สำหรับตัวท่าน (ถ้ามี)
-          มาเพียง 2 ข้อ พร้อมเขียนความคิดเห็นและข้อเสนอแนะในที่ว่างด้านล่าง</v-expansion-panel-title>
-        <v-expansion-panel-text>
-          <v-row v-for="(row, rowIndex) in groupedSubjectives" :key="rowIndex">
-            <v-col v-for="subjective in row" :key="subjective.questionID" cols="12"
-              class="d-flex align-center justify-start pa-0 ml-2">
-              <v-checkbox :label="subjective.question" :value="subjective.questionID" v-model="question81" hide-details
-                color="#007bc4" :false-value="''" :disabled="!allAnswersFilled"></v-checkbox>
-            </v-col>
-          </v-row>
-          <v-textarea v-model="commentQuestion81" :disabled="question81 == '' || !allAnswersFilled" variant="solo"
-            bg-color="#f8c849" color="black" rows="3" prepend-inner-icon="mdi-text-box-outline"
-            label="ความคิดเห็นหรือข้อเสนอแนะ" maxlength="255" class="mt-3"></v-textarea>
-
-          <v-row v-for="(row, rowIndex) in groupedSubjectives" :key="rowIndex">
-            <!-- เติมคอลัมน์ว่างในแถวสุดท้ายถ้าจำเป็น -->
-            <v-col v-for="subjective in row" :key="subjective.questionID" cols="12"
-              class="d-flex align-center justify-start pa-0 ml-2">
-              <v-checkbox :label="subjective.question" :value="subjective.questionID" v-model="question82" hide-details
-                color="#007bc4" :false-value="''" :disabled="!allAnswersFilled"></v-checkbox>
-            </v-col>
-          </v-row>
-          <v-textarea v-model="commentQuestion82" :disabled="question82 == '' || !allAnswersFilled" variant="solo"
-            bg-color="#f8c849" color="black" rows="3" label="ความคิดเห็นหรือข้อเสนอแนะ"
-            prepend-inner-icon="mdi-text-box-outline" maxlength="255" class="mt-3"></v-textarea>
-
-          <v-row v-for="(row, rowIndex) in groupedSubjectives" :key="rowIndex">
-            <!-- เติมคอลัมน์ว่างในแถวสุดท้ายถ้าจำเป็น -->
-            <v-col v-for="subjective in row" :key="subjective.questionID" cols="12"
-              class="d-flex align-center justify-start pa-0 ml-2">
-              <v-checkbox :label="subjective.question" :value="subjective.questionID" v-model="question83" hide-details
-                color="#007bc4" :false-value="''" :disabled="!allAnswersFilled"></v-checkbox>
-            </v-col>
-          </v-row>
-          <v-textarea v-model="commentQuestion83" :disabled="question83 == '' || !allAnswersFilled" variant="solo"
-            bg-color="#f8c849" color="black" rows="3" label="ความคิดเห็นหรือข้อเสนอแนะ"
-            prepend-inner-icon="mdi-text-box-outline" maxlength="255" class="mt-3"></v-textarea>
-        </v-expansion-panel-text>
-      </v-expansion-panel>
-    </v-expansion-panels>
+    <p class="font-weight-bold mb-5" color="#007bc4"><u>คำชี้แจง</u> ส่วนที่ 2 : โปรดเลือกหัวข้อที่ท่านเห็นว่า
+      สำคัญที่สุด สำหรับตัวท่าน (ถ้ามี)
+      มาเพียง 3 ข้อ พร้อมเขียนความคิดเห็นและข้อเสนอแนะในที่ว่างด้านล่าง</p>
+    <div>
+      <v-row class="mb-2">
+        <v-col v-for="subjective in subjectives" :key="subjective.questionID" cols="2.4" sm="12"
+          class="d-flex align-center justify-start pa-0 ml-2">
+          <v-checkbox :label="subjective.question" :value="subjective.questionID" v-model="question81" hide-details
+            color="#007bc4" :false-value="''"
+            :disabled="isDisabled(subjective.questionID) || !allAnswersFilled"></v-checkbox>
+        </v-col>
+      </v-row>
+        
+        <div v-for="(question, index) in question81" :key="question">
+          <v-textarea v-model="commentQuestion81[index]" variant="solo" bg-color="#f8c849" color="black" rows="3"
+          prepend-inner-icon="mdi-text-box-outline" :label="'ความคิดเห็นหรือข้อเสนอแนะ ' + (index + 1) + ' : ' + labelComment[index].question"
+          maxlength="255" class="mt-3" :disabled="!allAnswersFilled"></v-textarea>
+        </div>
+    </div>
 
     <v-row>
       <v-col class="d-flex justify-end">
-        <v-btn @click="saveAnswers" color="#f8c849" append-icon="mdi-text-box-check" :readonly="!allAnswersFilled">บันทึกคำตอบ</v-btn>
-        <v-btn @click="submitAnswers" color="#007bc4" append-icon="mdi-send-variant" class="ml-4" :readonly="!allAnswersFilled">ส่งคำตอบ</v-btn>
+        <v-btn @click="saveAnswers" color="#f8c849" append-icon="mdi-text-box-check"
+          v-if="allAnswersFilled">บันทึกคำตอบ</v-btn>
+        <v-btn @click="validateAnswer" color="#007bc4" append-icon="mdi-send-variant" class="ml-4"
+          v-if="allAnswersFilled">ส่งคำตอบ</v-btn>
       </v-col>
     </v-row>
 
@@ -165,7 +141,7 @@
     <v-sheet class="pa-4 text-center mx-auto set-size" elevation="12" max-width="600" rounded="lg">
       <v-icon class="mb-5" color="green" icon="mdi-check-circle" size="112"></v-icon>
 
-      <h2 class="mb-6">ครบแล้ว</h2>
+      <h2 class="mb-6">ทำแบบสอบถามครบแล้ว</h2>
 
       <p class="mb-4 text-medium-emphasis">
         ตอนนี้คุณทำแบบสอบถามครบทุกข้อแล้ว
@@ -197,13 +173,10 @@ export default {
       quesGroup: "all",
       answers: {},
       formYear: "2024",
-      question81: "",
-      commentQuestion81: "",
-      question82: "",
-      commentQuestion82: "",
-      question83: "",
-      commentQuestion83: "",
-      countdown: 1200, // จำนวนวินาทีที่ต้องการนับถอยหลัง
+      question81: [],
+      commentQuestion81: ['', '', ''],
+      labelComment: [],
+      countdown: 1800,
       timer: null,
       isActive: true,
       timeLeft: {
@@ -213,40 +186,42 @@ export default {
       timeoutDialog: false,
       fDialog: false,
       itemsPerPage: 10,
-      getState: false,
       allAnswersFilled: false,
+      showTime: false,
+      unAnsweredQuestions: [],
     };
   },
 
-  mounted() {
-    this.startTimer();
-  },
-
   watch: {
-    question81() {
-      if (this.getState) return (this.getState = false);
-      this.commentQuestion81 = "";
-    },
-    question82() {
-      if (this.getState) return (this.getState = false);
-      this.commentQuestion82 = "";
-    },
-    question83() {
-      if (this.getState) return (this.getState = false);
-      this.commentQuestion83 = "";
-    },
+    question81: {
+      handler(newVal, oldVal) {
+        // ตรวจสอบการเปลี่ยนแปลงใน array question81
+        oldVal.forEach((oldValue, index) => {
+          if (!newVal.includes(oldValue)) {
+            // เคลียร์ค่าใน commentQuestion81 ที่ตำแหน่งที่เกี่ยวข้อง
+            this.commentQuestion81.splice(index, 1);
+            this.labelComment.splice(index, 1);
+          }
+        });
+
+        for (let index = 0; index < this.question81.length; index++) {
+          const foundItem = this.subjectives.find((item) =>
+            item.questionID === this.question81[index]
+          );
+
+          // ตรวจสอบว่าค่า foundItem ยังไม่มีอยู่ใน labelComment ก่อนเพิ่มเข้าไป
+          if (foundItem && !this.labelComment.some(item => item.questionID === foundItem.questionID)) {
+            this.labelComment.push(foundItem);
+          }
+        }
+      },
+      deep: true
+    }
   },
 
   computed: {
-    groupedSubjectives() {
-      const chunkSize = 5;
-      const result = [];
-
-      for (let i = 0; i < this.subjectives.length; i += chunkSize) {
-        result.push(this.subjectives.slice(i, i + chunkSize));
-      }
-
-      return result;
+    selectedCount() {
+      return this.question81.length;
     },
   },
 
@@ -258,6 +233,10 @@ export default {
   },
 
   methods: {
+    isDisabled(questionID) {
+      return this.selectedCount >= 3 && !this.question81.includes(questionID);
+    },
+
     saveTimeout() {
       this.saveAnswers();
       localStorage.removeItem("userData");
@@ -361,26 +340,13 @@ export default {
           answerQuestion78: this.answers["78"],
           answerQuestion79: this.answers["79"],
           answerQuestion80: this.answers["80"],
-          answerQuestion81: this.question81,
-          answerQuestion81Comment: this.commentQuestion81,
-          answerQuestion82: this.question82,
-          answerQuestion82Comment: this.commentQuestion82,
-          answerQuestion83: this.question83,
-          answerQuestion83Comment: this.commentQuestion83,
+          answerQuestion81: this.question81[0],
+          answerQuestion81Comment: this.commentQuestion81[0],
+          answerQuestion82: this.question81[1],
+          answerQuestion82Comment: this.commentQuestion81[1],
+          answerQuestion83: this.question81[2],
+          answerQuestion83Comment: this.commentQuestion81[2],
         };
-        for (const key in this.answers) {
-          if (this.answers[key] === "") {
-            Swal.fire({
-              title: "ผิดพลาด!",
-              text: "คุณยังตอบแบบสอบถามไม่ครบทุกข้อ",
-              icon: "error",
-              confirmButtonColor: "#f8c849",
-              confirmButtonText: "ตกลง",
-              allowOutsideClick: false,
-            });
-            return;
-          }
-        }
 
         const token = localStorage.getItem("jwtToken");
         apiMentorEdit.setToken(token);
@@ -499,12 +465,12 @@ export default {
           answerQuestion78: this.answers["78"],
           answerQuestion79: this.answers["79"],
           answerQuestion80: this.answers["80"],
-          answerQuestion81: this.question81,
-          answerQuestion81Comment: this.commentQuestion81,
-          answerQuestion82: this.question82,
-          answerQuestion82Comment: this.commentQuestion82,
-          answerQuestion83: this.question83,
-          answerQuestion83Comment: this.commentQuestion83,
+          answerQuestion81: this.question81[0],
+          answerQuestion81Comment: this.commentQuestion81[0],
+          answerQuestion82: this.question81[1],
+          answerQuestion82Comment: this.commentQuestion81[1],
+          answerQuestion83: this.question81[2],
+          answerQuestion83Comment: this.commentQuestion81[2],
         };
 
         for (const key in deku) {
@@ -529,6 +495,42 @@ export default {
         });
       } catch (error) {
         console.error(error);
+      }
+    },
+
+    async validateAnswer() {
+      this.unAnsweredQuestions = [];
+
+      if (Object.keys(this.answers).length === 0) {
+        return Swal.fire({
+          title: "แจ้งเตือน!",
+          text: "คุณยังไม่ได้ตอบแบบสอบถาม",
+          icon: "warning",
+          confirmButtonColor: "#f8c849",
+          confirmButtonText: "ตกลง",
+          allowOutsideClick: false,
+        });
+      }
+
+      for (let i = 1; i <= this.questions.length; i++) {
+        if (!this.answers[i]) {
+          this.unAnsweredQuestions.push(' ' + i);
+        }
+      }
+
+      if (this.unAnsweredQuestions.length > 0) {
+        await Swal.fire({
+          title: "แจ้งเตือน!",
+          html: `
+        คุณยังไม่ได้ตอบแบบสอบถามข้อ <b>${this.unAnsweredQuestions}</b>
+      `,
+          icon: "warning",
+          confirmButtonColor: "#0c80c4",
+          confirmButtonText: "ตกลง",
+          allowOutsideClick: false,
+        });
+      } else {
+        this.submitAnswers();
       }
     },
 
@@ -592,27 +594,42 @@ export default {
           this.answers[i] = response.data[`answerQuestion${i}`];
         }
 
-        this.question81 = response.data.answerQuestion81;
-        this.commentQuestion81 = response.data.answerQuestion81Comment;
-        this.question82 = response.data.answerQuestion82;
-        this.commentQuestion82 = response.data.answerQuestion82Comment;
-        this.question83 = response.data.answerQuestion83;
-        this.commentQuestion83 = response.data.answerQuestion83Comment;
-        this.getState = true;
+        if (response.data.answerQuestion81 !== '') {
+          this.question81[0] = response.data.answerQuestion81;
+          this.commentQuestion81[0] = response.data.answerQuestion81Comment;
+        } else {
+          // ถ้าคุณไม่ต้องการให้สร้าง index ที่ 2 เลย ไม่ต้องทำอะไรในกรณีนี้
+        }
+
+        if (response.data.answerQuestion82 !== '') {
+          this.question81[1] = response.data.answerQuestion82;
+          this.commentQuestion81[1] = response.data.answerQuestion82Comment;
+        } else {
+          // ถ้าคุณไม่ต้องการให้สร้าง index ที่ 2 เลย ไม่ต้องทำอะไรในกรณีนี้
+        }
+
+        if (response.data.answerQuestion83 !== '') {
+          this.question81[2] = response.data.answerQuestion83;
+          this.commentQuestion81[2] = response.data.answerQuestion83Comment;
+        } else {
+          // ถ้าคุณไม่ต้องการให้สร้าง index ที่ 2 เลย ไม่ต้องทำอะไรในกรณีนี้
+        }
 
         for (let r = 1; r < 81; r++) {
           if (this.answers[r] === "") {
             this.allAnswersFilled = true;
+            this.startTimer();
             console.log("ไม่ครบ");
             break; // หยุดการวนลูปเมื่อพบค่าเป็น ''
           }
         }
 
         if (!this.allAnswersFilled) {
-          this.fDialog = true; // แสดง dialog ถ้าค่าใน answers ทั้งหมดไม่เป็น ''
+          this.fDialog = true;
         }
       } catch (error) {
         this.allAnswersFilled = true;
+        this.startTimer()
         console.error(error);
       }
     },
@@ -628,6 +645,7 @@ export default {
           this.timeoutDialog = true;
         }
       }, 1000);
+      this.showTime = true
     },
     updateTime() {
       const minutes = Math.floor(this.countdown / 60);

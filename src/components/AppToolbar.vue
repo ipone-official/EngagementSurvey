@@ -7,8 +7,8 @@
 
     <v-menu v-if="showUser">
       <template v-slot:activator="{ props }">
-        <v-avatar color="white" v-bind="props" size="32">
-          <v-icon icon="mdi-account-circle" color="#007bc4" size="30"></v-icon>
+        <v-avatar color="#007fc4" class="white-border" v-bind="props" size="38">
+          <img src="https://webapps.ip-one.com/IP1Career/pdf/anonymous-white-user.png" class="mt-2" width="45vh" height="45vh"/>
         </v-avatar>
       </template>
       <v-list>
@@ -76,6 +76,10 @@ function logout() {
   justify-content: flex-end;
   margin-right: 10px;
   font-weight: bold;
+}
+
+.white-border {
+  border: 2px solid white; /* กำหนดขนาดของ border และสีเป็นสีขาว */
 }
 
 @media (max-width: 685px){
