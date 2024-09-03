@@ -1,8 +1,8 @@
 <template>
-  <v-container class="py-12">
+  <v-container class="py-12 my-5">
     <v-row no-gutters>
       <v-col align="center">
-        <v-sheet class="pa-4 set-size" color="#007bc4" elevation="3">
+        <v-sheet class="pa-5 set-size" color="#007fc4" elevation="4">
           <p class="text-center mb-7 mt-2 set-font">Engagement Survey</p>
           <v-text-field v-model="firstName" variant="solo" label="รหัสบัตรประชาชน" bg-color="#f4f4f4"
             @keydown="keyFilter($event, 'number')" maxlength="13">
@@ -11,7 +11,7 @@
             </template></v-text-field>
           <v-btn color="#f8c849" block class="my-3 white--text" @click="validate">ยืนยัน</v-btn>
 
-          <img class="mt-8" src="https://webapps.ip-one.com/IP1Career/static/Banner-login.png" width="80%" />
+          <!-- <img class="mt-8" src="https://webapps.ip-one.com/IP1Career/static/Banner-login.png" width="80%" /> -->
         </v-sheet>
       </v-col>
     </v-row>
@@ -110,6 +110,17 @@ export default {
 
 .set-font {
   font-size: 2.125rem;
+}
+
+@media (max-width : 1400px) {
+  .set-size {
+    width: 60%;
+  }
+
+  .set-font {
+    font-size: 1.75rem;
+    ;
+  }
 }
 
 @media (max-width : 960px) {
